@@ -85,19 +85,13 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
                             </svg>
                         </button>
-                     <pre id="windows-connect" class="bg-gray-900 text-gray-300 p-4 rounded border border-gray-600 overflow-x-auto">
-<code>
-# Navigate to PostgreSQL bin directory
-cd "C:\Program Files\PostgreSQL\pgAdmin V\bin"
+         <pre id="unix-connect" class="bg-gray-900 text-gray-300 p-4 rounded border border-gray-600 overflow-x-auto"><code># Set environment variable for password
+export PGPASSWORD="your_password"
 
-# Connect to PostgreSQL database
-psql -U your_username ^
-     -d your_database ^
-     -h localhost ^
-     -p 5432 ^
-     -W
-</code>
-</pre>
+# Connect to database
+psql -U your_username -d your_database -h localhost -p 5432</code></pre>
+                    </div>
+                </div>
 
 
                 <!-- Windows -->
