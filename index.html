@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SnailyCAD Recovery Documentation</title>
+    <title>SnailyCAD Manual Recovery Commands</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -40,15 +40,15 @@
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
-                        <h1 class="text-xl font-semibold text-white">SnailyCAD Recovery Documentation</h1>
+                        <h1 class="text-xl font-semibold text-white">SnailyCAD Manual Recovery Commands</h1>
                     </div>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <button onclick="showPage('shell')" id="shell-tab" class="tab-button px-4 py-2 rounded-md text-sm font-medium bg-blue-600 text-white">
-                        Shell Script (.sh)
+                    <button onclick="showPage('unix')" id="unix-tab" class="tab-button px-4 py-2 rounded-md text-sm font-medium bg-blue-600 text-white">
+                        Unix/Linux/macOS
                     </button>
-                    <button onclick="showPage('batch')" id="batch-tab" class="tab-button px-4 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700">
-                        Batch Script (.bat)
+                    <button onclick="showPage('windows')" id="windows-tab" class="tab-button px-4 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700">
+                        Windows
                     </button>
                 </div>
             </div>
@@ -60,26 +60,26 @@
         <aside class="w-64 bg-gray-800 border-r border-gray-700 h-screen sticky top-16 overflow-y-auto">
             <nav class="mt-5 px-2">
                 <div class="space-y-1">
-                    <a href="#overview" class="sidebar-link text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md">
-                        Overview
+                    <a href="#setup" class="sidebar-link text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                        Database Setup
                     </a>
-                    <a href="#prerequisites" class="sidebar-link text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md">
-                        Prerequisites
+                    <a href="#list-users" class="sidebar-link text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                        List Users
                     </a>
-                    <a href="#installation" class="sidebar-link text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md">
-                        Installation
+                    <a href="#unlink-discord" class="sidebar-link text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                        Unlink Discord
                     </a>
-                    <a href="#usage" class="sidebar-link text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md">
-                        Usage Guide
+                    <a href="#disable-whitelist" class="sidebar-link text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                        Disable Whitelist
                     </a>
-                    <a href="#functions" class="sidebar-link text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md">
-                        Functions
+                    <a href="#login-features" class="sidebar-link text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                        Login Features
                     </a>
-                    <a href="#commands" class="sidebar-link text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md">
-                        Commands
+                    <a href="#reset-passwords" class="sidebar-link text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                        Reset Passwords
                     </a>
-                    <a href="#troubleshooting" class="sidebar-link text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md">
-                        Troubleshooting
+                    <a href="#maintenance" class="sidebar-link text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                        Maintenance
                     </a>
                 </div>
             </nav>
@@ -87,439 +87,411 @@
 
         <!-- Main Content -->
         <main class="flex-1 px-4 py-6 lg:px-8">
-            <!-- Shell Script Documentation -->
-            <div id="shell-content" class="max-w-7xl mx-auto">
+            <!-- Unix/Linux/macOS Commands -->
+            <div id="unix-content" class="max-w-7xl mx-auto">
                 <div class="mb-8">
-                    <h1 class="text-3xl font-bold text-white mb-4">SnailyCAD Recovery - Shell Script (.sh)</h1>
-                    <p class="text-gray-300 text-lg">Complete administration tool for Unix/Linux/macOS systems</p>
+                    <h1 class="text-3xl font-bold text-white mb-4">SnailyCAD Manual Recovery - Unix/Linux/macOS</h1>
+                    <p class="text-gray-300 text-lg">Step-by-step manual commands for SnailyCAD database recovery and administration</p>
                 </div>
 
-                <!-- Overview -->
-                <section id="overview" class="mb-12">
-                    <h2 class="text-2xl font-semibold text-white mb-4">Overview</h2>
-                    <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-                        <p class="text-gray-300 mb-4">
-                            The <code class="bg-gray-700 px-2 py-1 rounded text-blue-300">full-snailycad-recovery.sh</code> script is a comprehensive administration tool for SnailyCAD instances running on Unix-like systems. It provides database management capabilities, user administration, and system maintenance functions.
-                        </p>
-                        <div class="bg-blue-900/50 border border-blue-700 p-4 rounded-lg">
-                            <h4 class="text-blue-300 font-semibold mb-2">Key Features:</h4>
-                            <ul class="text-gray-300 space-y-1">
-                                <li>• Automatic PostgreSQL detection</li>
-                                <li>• User management and password reset</li>
-                                <li>• Discord ID unlinking</li>
-                                <li>• CAD whitelist management</li>
-                                <li>• Feature toggle controls</li>
-                                <li>• Database maintenance operations</li>
-                            </ul>
+                <!-- Database Setup -->
+                <section id="setup" class="mb-12">
+                    <h2 class="text-2xl font-semibold text-white mb-4">Database Connection Setup</h2>
+                    
+                    <div class="space-y-6">
+                        <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                            <h3 class="text-xl font-semibold text-white mb-4">Step 1: Find PostgreSQL Installation</h3>
+                            <div class="code-block">
+                                <div class="bg-gray-900 rounded-lg p-4 relative">
+                                    <pre class="text-green-400 text-sm overflow-x-auto"><code># Check if psql is in PATH
+which psql
+
+# Find PostgreSQL installation
+find /usr -name "psql" 2>/dev/null
+find /opt -name "psql" 2>/dev/null
+find /Applications -name "psql" 2>/dev/null
+
+# Common locations
+ls -la /usr/bin/psql
+ls -la /usr/local/bin/psql
+ls -la /opt/postgresql/bin/psql</code></pre>
+                                    <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
+                                        Copy
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                            <h3 class="text-xl font-semibold text-white mb-4">Step 2: Set Environment Variables</h3>
+                            <div class="code-block">
+                                <div class="bg-gray-900 rounded-lg p-4 relative">
+                                    <pre class="text-green-400 text-sm overflow-x-auto"><code># Set database connection details
+export PGHOST="localhost"
+export PGPORT="5432"
+export PGUSER="postgres"
+export PGDATABASE="snaily-cad-v4"
+export PGPASSWORD="your_password_here"</code></pre>
+                                    <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
+                                        Copy
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                            <h3 class="text-xl font-semibold text-white mb-4">Step 3: Test Database Connection</h3>
+                            <div class="code-block">
+                                <div class="bg-gray-900 rounded-lg p-4 relative">
+                                    <pre class="text-green-400 text-sm overflow-x-auto"><code># Test connection
+psql -c "SELECT 1;"
+
+# Alternative with full connection string
+psql -U postgres -d snaily-cad-v4 -h localhost -p 5432 -c "SELECT version();"</code></pre>
+                                    <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
+                                        Copy
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
 
-                <!-- Prerequisites -->
-                <section id="prerequisites" class="mb-12">
-                    <h2 class="text-2xl font-semibold text-white mb-4">Prerequisites</h2>
+                <!-- List Users -->
+                <section id="list-users" class="mb-12">
+                    <h2 class="text-2xl font-semibold text-white mb-4">1. List All Users</h2>
+                    <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                        <p class="text-gray-300 mb-4">Display all users with their information:</p>
+                        <div class="code-block">
+                            <div class="bg-gray-900 rounded-lg p-4 relative">
+                                <pre class="text-blue-400 text-sm overflow-x-auto"><code>psql -c "SELECT row_number() OVER () AS num, id, username, \"discordId\" FROM public.\"User\" ORDER BY username;"</code></pre>
+                                <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
+                                    Copy
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <h4 class="text-white font-semibold mb-2">Alternative: Show only users with Discord IDs</h4>
+                            <div class="code-block">
+                                <div class="bg-gray-900 rounded-lg p-4 relative">
+                                    <pre class="text-blue-400 text-sm overflow-x-auto"><code>psql -c "SELECT username, \"discordId\" FROM public.\"User\" WHERE \"discordId\" IS NOT NULL;"</code></pre>
+                                    <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
+                                        Copy
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Unlink Discord -->
+                <section id="unlink-discord" class="mb-12">
+                    <h2 class="text-2xl font-semibold text-white mb-4">2. Unlink Discord ID</h2>
+                    <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="text-white font-semibold mb-2">Step 1: Find user by Discord ID</h4>
+                                <div class="code-block">
+                                    <div class="bg-gray-900 rounded-lg p-4 relative">
+                                        <pre class="text-blue-400 text-sm overflow-x-auto"><code>psql -c "SELECT id, username, \"discordId\" FROM public.\"User\" WHERE \"discordId\" = 'REPLACE_WITH_DISCORD_ID';"</code></pre>
+                                        <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
+                                            Copy
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h4 class="text-white font-semibold mb-2">Step 2: Unlink the Discord ID</h4>
+                                <div class="code-block">
+                                    <div class="bg-gray-900 rounded-lg p-4 relative">
+                                        <pre class="text-blue-400 text-sm overflow-x-auto"><code>psql -c "UPDATE public.\"User\" SET \"discordId\" = NULL WHERE \"discordId\" = 'REPLACE_WITH_DISCORD_ID';"</code></pre>
+                                        <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
+                                            Copy
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h4 class="text-white font-semibold mb-2">Step 3: Verify users without Discord ID</h4>
+                                <div class="code-block">
+                                    <div class="bg-gray-900 rounded-lg p-4 relative">
+                                        <pre class="text-blue-400 text-sm overflow-x-auto"><code>psql -c "SELECT id, username FROM public.\"User\" WHERE \"discordId\" IS NULL AND username IS NOT NULL LIMIT 10;"</code></pre>
+                                        <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
+                                            Copy
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Disable Whitelist -->
+                <section id="disable-whitelist" class="mb-12">
+                    <h2 class="text-2xl font-semibold text-white mb-4">3. Disable CAD Whitelist</h2>
+                    <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="text-white font-semibold mb-2">Check current whitelist status</h4>
+                                <div class="code-block">
+                                    <div class="bg-gray-900 rounded-lg p-4 relative">
+                                        <pre class="text-blue-400 text-sm overflow-x-auto"><code>psql -c "SELECT id, name, whitelisted FROM public.\"cad\";"</code></pre>
+                                        <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
+                                            Copy
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h4 class="text-white font-semibold mb-2">Disable whitelist for all CADs</h4>
+                                <div class="code-block">
+                                    <div class="bg-gray-900 rounded-lg p-4 relative">
+                                        <pre class="text-blue-400 text-sm overflow-x-auto"><code>psql -c "UPDATE public.\"cad\" SET whitelisted = false;"</code></pre>
+                                        <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
+                                            Copy
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h4 class="text-white font-semibold mb-2">Verify changes</h4>
+                                <div class="code-block">
+                                    <div class="bg-gray-900 rounded-lg p-4 relative">
+                                        <pre class="text-blue-400 text-sm overflow-x-auto"><code>psql -c "SELECT id, name, whitelisted FROM public.\"cad\";"</code></pre>
+                                        <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
+                                            Copy
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Login Features -->
+                <section id="login-features" class="mb-12">
+                    <h2 class="text-2xl font-semibold text-white mb-4">4. Manage Login Features</h2>
+                    <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                        <div class="space-y-6">
+                            <div>
+                                <h4 class="text-white font-semibold mb-2">Check current feature settings</h4>
+                                <div class="code-block">
+                                    <div class="bg-gray-900 rounded-lg p-4 relative">
+                                        <pre class="text-blue-400 text-sm overflow-x-auto"><code>psql -c "SELECT feature, \"isEnabled\" FROM public.\"CadFeature\" ORDER BY feature;"</code></pre>
+                                        <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
+                                            Copy
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="bg-gray-700 p-4 rounded-lg">
+                                    <h5 class="text-green-400 font-semibold mb-2">Enable Regular Login</h5>
+                                    <div class="code-block">
+                                        <div class="bg-gray-900 rounded-lg p-3 relative">
+                                            <pre class="text-blue-400 text-xs overflow-x-auto"><code>psql -c "UPDATE public.\"CadFeature\" SET \"isEnabled\" = true WHERE feature = 'ALLOW_REGULAR_LOGIN';"</code></pre>
+                                            <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-1 right-1 bg-blue-600 text-white px-2 py-1 rounded text-xs hover:bg-blue-700">
+                                                Copy
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-gray-700 p-4 rounded-lg">
+                                    <h5 class="text-yellow-400 font-semibold mb-2">Disable Discord Auth</h5>
+                                    <div class="code-block">
+                                        <div class="bg-gray-900 rounded-lg p-3 relative">
+                                            <pre class="text-blue-400 text-xs overflow-x-auto"><code>psql -c "UPDATE public.\"CadFeature\" SET \"isEnabled\" = false WHERE feature = 'DISCORD_AUTH';"</code></pre>
+                                            <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-1 right-1 bg-blue-600 text-white px-2 py-1 rounded text-xs hover:bg-blue-700">
+                                                Copy
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-gray-700 p-4 rounded-lg">
+                                    <h5 class="text-blue-400 font-semibold mb-2">Toggle Steam OAuth</h5>
+                                    <div class="code-block">
+                                        <div class="bg-gray-900 rounded-lg p-3 relative">
+                                            <pre class="text-blue-400 text-xs overflow-x-auto"><code>psql -c "UPDATE public.\"CadFeature\" SET \"isEnabled\" = true WHERE feature = 'STEAM_OAUTH';"</code></pre>
+                                            <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-1 right-1 bg-blue-600 text-white px-2 py-1 rounded text-xs hover:bg-blue-700">
+                                                Copy
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-green-900/50 border border-green-700 p-4 rounded-lg">
+                                <h4 class="text-green-300 font-semibold mb-2">🔧 Common Recovery Sequence</h4>
+                                <p class="text-gray-300 mb-3">To restore normal username/password login:</p>
+                                <div class="code-block">
+                                    <div class="bg-gray-900 rounded-lg p-4 relative">
+                                        <pre class="text-blue-400 text-sm overflow-x-auto"><code># Enable regular login and disable Discord authentication
+psql -c "UPDATE public.\"CadFeature\" SET \"isEnabled\" = true WHERE feature = 'ALLOW_REGULAR_LOGIN';"
+psql -c "UPDATE public.\"CadFeature\" SET \"isEnabled\" = false WHERE feature = 'DISCORD_AUTH';"</code></pre>
+                                        <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
+                                            Copy
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Reset Passwords -->
+                <section id="reset-passwords" class="mb-12">
+                    <h2 class="text-2xl font-semibold text-white mb-4">5. Reset User Passwords</h2>
+                    <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="text-white font-semibold mb-2">Step 1: Enable pgcrypto extension</h4>
+                                <div class="code-block">
+                                    <div class="bg-gray-900 rounded-lg p-4 relative">
+                                        <pre class="text-blue-400 text-sm overflow-x-auto"><code>psql -c "CREATE EXTENSION IF NOT EXISTS pgcrypto;"</code></pre>
+                                        <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
+                                            Copy
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h4 class="text-white font-semibold mb-2">Step 2: List users with row numbers</h4>
+                                <div class="code-block">
+                                    <div class="bg-gray-900 rounded-lg p-4 relative">
+                                        <pre class="text-blue-400 text-sm overflow-x-auto"><code>psql -c "SELECT row_number() OVER () AS num, username, id FROM public.\"User\" WHERE username IS NOT NULL ORDER BY username;"</code></pre>
+                                        <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
+                                            Copy
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h4 class="text-white font-semibold mb-2">Step 3: Reset password by username</h4>
+                                <div class="code-block">
+                                    <div class="bg-gray-900 rounded-lg p-4 relative">
+                                        <pre class="text-blue-400 text-sm overflow-x-auto"><code>psql -c "UPDATE public.\"User\" SET password = crypt('NEW_PASSWORD_HERE', gen_salt('bf')) WHERE username = 'USERNAME_HERE';"</code></pre>
+                                        <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
+                                            Copy
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h4 class="text-white font-semibold mb-2">Alternative: Reset password by row number</h4>
+                                <div class="code-block">
+                                    <div class="bg-gray-900 rounded-lg p-4 relative">
+                                        <pre class="text-blue-400 text-sm overflow-x-auto"><code>psql -c "UPDATE public.\"User\" SET password = crypt('NEW_PASSWORD_HERE', gen_salt('bf')) WHERE username = (SELECT username FROM (SELECT row_number() OVER () AS num, username FROM public.\"User\" WHERE username IS NOT NULL ORDER BY username) t WHERE num = ROW_NUMBER_HERE);"</code></pre>
+                                        <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
+                                            Copy
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-yellow-900/50 border border-yellow-700 p-4 rounded-lg">
+                                <h4 class="text-yellow-300 font-semibold mb-2">⚠️ Example Usage</h4>
+                                <p class="text-gray-300 mb-2">Reset password for user "admin" to "newpassword123":</p>
+                                <div class="code-block">
+                                    <div class="bg-gray-900 rounded-lg p-4 relative">
+                                        <pre class="text-blue-400 text-sm overflow-x-auto"><code>psql -c "UPDATE public.\"User\" SET password = crypt('newpassword123', gen_salt('bf')) WHERE username = 'admin';"</code></pre>
+                                        <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
+                                            Copy
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Maintenance -->
+                <section id="maintenance" class="mb-12">
+                    <h2 class="text-2xl font-semibold text-white mb-4">6. Database Maintenance</h2>
                     <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                                <h4 class="text-white font-semibold mb-3">System Requirements</h4>
-                                <ul class="text-gray-300 space-y-2">
-                                    <li>• Unix/Linux/macOS system</li>
-                                    <li>• Bash shell (version 4.0+)</li>
-                                    <li>• PostgreSQL client tools</li>
-                                    <li>• Network access to database</li>
-                                </ul>
+                                <h4 class="text-white font-semibold mb-3">Vacuum and Analyze</h4>
+                                <div class="space-y-3">
+                                    <div class="code-block">
+                                        <div class="bg-gray-900 rounded-lg p-4 relative">
+                                            <pre class="text-blue-400 text-sm overflow-x-auto"><code># Full vacuum and analyze
+psql -c "VACUUM ANALYZE;"</code></pre>
+                                            <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
+                                                Copy
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="code-block">
+                                        <div class="bg-gray-900 rounded-lg p-4 relative">
+                                            <pre class="text-blue-400 text-sm overflow-x-auto"><code># Update statistics only
+psql -c "ANALYZE;"</code></pre>
+                                            <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
+                                                Copy
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+                            
                             <div>
-                                <h4 class="text-white font-semibold mb-3">Database Access</h4>
-                                <ul class="text-gray-300 space-y-2">
-                                    <li>• Database credentials</li>
-                                    <li>• Administrative privileges</li>
-                                    <li>• Network connectivity</li>
-                                    <li>• Firewall permissions</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Installation -->
-                <section id="installation" class="mb-12">
-                    <h2 class="text-2xl font-semibold text-white mb-4">Installation</h2>
-                    
-                    <div class="space-y-6">
-                        <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-                            <h3 class="text-xl font-semibold text-white mb-4">Step 1: Download the Script</h3>
-                            <div class="code-block">
-                                <div class="bg-gray-900 rounded-lg p-4 relative">
-                                    <pre class="text-green-400 text-sm overflow-x-auto"><code># Download the script
-wget https://github.com/EWANZO101/newdocs/raw/main/caddownloads/full-snailycad-recovery.sh
-
-# Or using curl
-curl -O https://github.com/EWANZO101/newdocs/raw/main/caddownloads/full-snailycad-recovery.sh</code></pre>
-                                    <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
-                                        Copy
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-                            <h3 class="text-xl font-semibold text-white mb-4">Step 2: Make Executable</h3>
-                            <div class="code-block">
-                                <div class="bg-gray-900 rounded-lg p-4 relative">
-                                    <pre class="text-green-400 text-sm overflow-x-auto"><code>chmod +x full-snailycad-recovery.sh</code></pre>
-                                    <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
-                                        Copy
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-                            <h3 class="text-xl font-semibold text-white mb-4">Step 3: Run the Script</h3>
-                            <div class="code-block">
-                                <div class="bg-gray-900 rounded-lg p-4 relative">
-                                    <pre class="text-green-400 text-sm overflow-x-auto"><code>./full-snailycad-recovery.sh</code></pre>
-                                    <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
-                                        Copy
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Usage Guide -->
-                <section id="usage" class="mb-12">
-                    <h2 class="text-2xl font-semibold text-white mb-4">Usage Guide</h2>
-                    <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-                        <div class="space-y-4">
-                            <p class="text-gray-300">When you run the script, it will:</p>
-                            <ol class="text-gray-300 space-y-2 list-decimal list-inside">
-                                <li>Automatically detect your PostgreSQL installation</li>
-                                <li>Prompt for database connection details</li>
-                                <li>Test the database connection</li>
-                                <li>Display the main administration menu</li>
-                            </ol>
-                            
-                            <div class="bg-yellow-900/50 border border-yellow-700 p-4 rounded-lg mt-4">
-                                <h4 class="text-yellow-300 font-semibold mb-2">⚠️ Security Note:</h4>
-                                <p class="text-gray-300">Passwords are temporarily stored in memory and cleared on exit. Avoid running as root unless necessary.</p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Functions -->
-                <section id="functions" class="mb-12">
-                    <h2 class="text-2xl font-semibold text-white mb-4">Available Functions</h2>
-                    
-                    <div class="grid grid-cols-1 gap-6">
-                        <!-- Function 1 -->
-                        <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-                            <h3 class="text-lg font-semibold text-white mb-3">1. List All Users</h3>
-                            <p class="text-gray-300 mb-4">Display all users in the database with their IDs, usernames, and Discord IDs.</p>
-                            <div class="code-block">
-                                <div class="bg-gray-900 rounded-lg p-4 relative">
-                                    <pre class="text-blue-400 text-sm overflow-x-auto"><code>SELECT row_number() OVER () AS num, id, username, "discordId" 
-FROM public."User" 
-ORDER BY username;</code></pre>
-                                    <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
-                                        Copy
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Function 2 -->
-                        <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-                            <h3 class="text-lg font-semibold text-white mb-3">2. Unlink Discord ID</h3>
-                            <p class="text-gray-300 mb-4">Remove Discord ID association from users to allow standard login.</p>
-                            <div class="space-y-3">
-                                <div class="text-sm text-gray-400">Search for user:</div>
-                                <div class="code-block">
-                                    <div class="bg-gray-900 rounded-lg p-4 relative">
-                                        <pre class="text-blue-400 text-sm overflow-x-auto"><code>SELECT id, username, "discordId" 
-FROM public."User" 
-WHERE "discordId" = 'DISCORD_ID_HERE';</code></pre>
-                                        <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
-                                            Copy
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="text-sm text-gray-400">Unlink Discord ID:</div>
-                                <div class="code-block">
-                                    <div class="bg-gray-900 rounded-lg p-4 relative">
-                                        <pre class="text-blue-400 text-sm overflow-x-auto"><code>UPDATE public."User" 
-SET "discordId" = NULL 
-WHERE "discordId" = 'DISCORD_ID_HERE';</code></pre>
-                                        <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
-                                            Copy
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Function 3 -->
-                        <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-                            <h3 class="text-lg font-semibold text-white mb-3">3. Update CAD Whitelist</h3>
-                            <p class="text-gray-300 mb-4">Disable whitelist requirements for all CAD instances.</p>
-                            <div class="code-block">
-                                <div class="bg-gray-900 rounded-lg p-4 relative">
-                                    <pre class="text-blue-400 text-sm overflow-x-auto"><code>UPDATE public."cad" SET whitelisted = false;</code></pre>
-                                    <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
-                                        Copy
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Function 4 -->
-                        <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-                            <h3 class="text-lg font-semibold text-white mb-3">4. Update CadFeature Settings</h3>
-                            <p class="text-gray-300 mb-4">Manage authentication features like regular login, Steam OAuth, and Discord authentication.</p>
-                            
-                            <div class="space-y-4">
-                                <div class="text-sm text-gray-400">Available features:</div>
-                                <ul class="text-gray-300 space-y-1 list-disc list-inside">
-                                    <li>ALLOW_REGULAR_LOGIN - Enable/disable username/password login</li>
-                                    <li>STEAM_OAUTH - Enable/disable Steam authentication</li>
-                                    <li>DISCORD_AUTH - Enable/disable Discord authentication</li>
-                                </ul>
-                                
-                                <div class="text-sm text-gray-400">Check current status:</div>
-                                <div class="code-block">
-                                    <div class="bg-gray-900 rounded-lg p-4 relative">
-                                        <pre class="text-blue-400 text-sm overflow-x-auto"><code>SELECT feature, "isEnabled" 
-FROM public."CadFeature" 
-ORDER BY feature;</code></pre>
-                                        <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
-                                            Copy
-                                        </button>
-                                    </div>
-                                </div>
-                                
-                                <div class="text-sm text-gray-400">Update feature (replace FEATURE_NAME and true/false):</div>
-                                <div class="code-block">
-                                    <div class="bg-gray-900 rounded-lg p-4 relative">
-                                        <pre class="text-blue-400 text-sm overflow-x-auto"><code>UPDATE public."CadFeature" 
-SET "isEnabled" = true 
-WHERE feature = 'ALLOW_REGULAR_LOGIN';</code></pre>
-                                        <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
-                                            Copy
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Function 5 -->
-                        <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-                            <h3 class="text-lg font-semibold text-white mb-3">5. Reset User Password</h3>
-                            <p class="text-gray-300 mb-4">Reset user passwords using encrypted storage.</p>
-                            
-                            <div class="space-y-3">
-                                <div class="text-sm text-gray-400">Ensure pgcrypto extension:</div>
-                                <div class="code-block">
-                                    <div class="bg-gray-900 rounded-lg p-4 relative">
-                                        <pre class="text-blue-400 text-sm overflow-x-auto"><code>CREATE EXTENSION IF NOT EXISTS pgcrypto;</code></pre>
-                                        <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
-                                            Copy
-                                        </button>
-                                    </div>
-                                </div>
-                                
-                                <div class="text-sm text-gray-400">List users with numbers:</div>
-                                <div class="code-block">
-                                    <div class="bg-gray-900 rounded-lg p-4 relative">
-                                        <pre class="text-blue-400 text-sm overflow-x-auto"><code>SELECT row_number() OVER () AS num, username, id 
-FROM public."User" 
-WHERE username IS NOT NULL 
-ORDER BY username;</code></pre>
-                                        <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
-                                            Copy
-                                        </button>
-                                    </div>
-                                </div>
-                                
-                                <div class="text-sm text-gray-400">Reset password (replace USER_NUMBER and NEW_PASSWORD):</div>
-                                <div class="code-block">
-                                    <div class="bg-gray-900 rounded-lg p-4 relative">
-                                        <pre class="text-blue-400 text-sm overflow-x-auto"><code>UPDATE public."User" 
-SET password = crypt('NEW_PASSWORD', gen_salt('bf')) 
-WHERE username = (
-    SELECT username FROM (
-        SELECT row_number() OVER () AS num, username 
-        FROM public."User" 
-        WHERE username IS NOT NULL 
-        ORDER BY username
-    ) t WHERE num = USER_NUMBER
-);</code></pre>
-                                        <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
-                                            Copy
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Function 6 -->
-                        <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-                            <h3 class="text-lg font-semibold text-white mb-3">6. Maintenance Operations</h3>
-                            <p class="text-gray-300 mb-4">Database maintenance and optimization commands.</p>
-                            
-                            <div class="space-y-4">
-                                <div class="text-sm text-gray-400">Vacuum database:</div>
-                                <div class="code-block">
-                                    <div class="bg-gray-900 rounded-lg p-4 relative">
-                                        <pre class="text-blue-400 text-sm overflow-x-auto"><code>VACUUM ANALYZE;</code></pre>
-                                        <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
-                                            Copy
-                                        </button>
-                                    </div>
-                                </div>
-                                
-                                <div class="text-sm text-gray-400">Update statistics:</div>
-                                <div class="code-block">
-                                    <div class="bg-gray-900 rounded-lg p-4 relative">
-                                        <pre class="text-blue-400 text-sm overflow-x-auto"><code>ANALYZE;</code></pre>
-                                        <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
-                                            Copy
-                                        </button>
-                                    </div>
-                                </div>
-                                
-                                <div class="text-sm text-gray-400">Check database size:</div>
-                                <div class="code-block">
-                                    <div class="bg-gray-900 rounded-lg p-4 relative">
-                                        <pre class="text-blue-400 text-sm overflow-x-auto"><code>SELECT pg_size_pretty(pg_database_size('DATABASE_NAME')) as database_size;</code></pre>
-                                        <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
-                                            Copy
-                                        </button>
-                                    </div>
-                                </div>
-                                
-                                <div class="text-sm text-gray-400">Show active connections:</div>
-                                <div class="code-block">
-                                    <div class="bg-gray-900 rounded-lg p-4 relative">
-                                        <pre class="text-blue-400 text-sm overflow-x-auto"><code>SELECT pid, usename, application_name, client_addr, state, query_start 
-FROM pg_stat_activity 
-WHERE state = 'active';</code></pre>
-                                        <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
-                                            Copy
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Commands -->
-                <section id="commands" class="mb-12">
-                    <h2 class="text-2xl font-semibold text-white mb-4">Manual Commands</h2>
-                    
-                    <div class="space-y-6">
-                        <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-                            <h3 class="text-lg font-semibold text-white mb-3">PostgreSQL Connection</h3>
-                            <div class="code-block">
-                                <div class="bg-gray-900 rounded-lg p-4 relative">
-                                    <pre class="text-green-400 text-sm overflow-x-auto"><code># Connect to PostgreSQL
-psql -U username -d database_name -h hostname -p port
-
-# Example
-psql -U postgres -d snaily-cad-v4 -h localhost -p 5432</code></pre>
-                                    <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
-                                        Copy
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-                            <h3 class="text-lg font-semibold text-white mb-3">Script Permissions</h3>
-                            <div class="code-block">
-                                <div class="bg-gray-900 rounded-lg p-4 relative">
-                                    <pre class="text-green-400 text-sm overflow-x-auto"><code># Make script executable
-chmod +x full-snailycad-recovery.sh
-
-# Run script
-./full-snailycad-recovery.sh
-
-# Run with bash explicitly
-bash full-snailycad-recovery.sh</code></pre>
-                                    <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
-                                        Copy
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Troubleshooting -->
-                <section id="troubleshooting" class="mb-12">
-                    <h2 class="text-2xl font-semibold text-white mb-4">Troubleshooting</h2>
-                    
-                    <div class="space-y-6">
-                        <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-                            <h3 class="text-lg font-semibold text-white mb-3">Common Issues</h3>
-                            
-                            <div class="space-y-4">
-                                <div class="bg-red-900/50 border border-red-700 p-4 rounded-lg">
-                                    <h4 class="text-red-300 font-semibold mb-2">PostgreSQL Not Found</h4>
-                                    <p class="text-gray-300 mb-2">If the script can't find PostgreSQL:</p>
+                                <h4 class="text-white font-semibold mb-3">Database Information</h4>
+                                <div class="space-y-3">
                                     <div class="code-block">
                                         <div class="bg-gray-900 rounded-lg p-4 relative">
-                                            <pre class="text-green-400 text-sm overflow-x-auto"><code># Find PostgreSQL installation
-which psql
-find /usr -name "psql" 2>/dev/null
-find /opt -name "psql" 2>/dev/null
-
-# Common locations:
-/usr/bin/psql
-/usr/local/bin/psql
-/opt/postgresql/bin/psql</code></pre>
+                                            <pre class="text-blue-400 text-sm overflow-x-auto"><code># Check database size
+psql -c "SELECT pg_size_pretty(pg_database_size(current_database()));"</code></pre>
+                                            <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
+                                                Copy
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="code-block">
+                                        <div class="bg-gray-900 rounded-lg p-4 relative">
+                                            <pre class="text-blue-400 text-sm overflow-x-auto"><code># Show active connections
+psql -c "SELECT pid, usename, application_name, client_addr, state FROM pg_stat_activity WHERE state = 'active';"</code></pre>
                                             <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
                                                 Copy
                                             </button>
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="bg-yellow-900/50 border border-yellow-700 p-4 rounded-lg">
-                                    <h4 class="text-yellow-300 font-semibold mb-2">Connection Failed</h4>
-                                    <p class="text-gray-300 mb-2">Check database connection:</p>
-                                    <div class="code-block">
-                                        <div class="bg-gray-900 rounded-lg p-4 relative">
-                                            <pre class="text-green-400 text-sm overflow-x-auto"><code># Test connection manually
-psql -U username -d database -h host -p port -c "SELECT 1;"
-
-# Check if PostgreSQL is running
-sudo systemctl status postgresql
-sudo service postgresql status</code></pre>
-                                            <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
-                                                Copy
-                                            </button>
-                                        </div>
+                            </div>
+                            
+                            <div>
+                                <h4 class="text-white font-semibold mb-3">Table Statistics</h4>
+                                <div class="code-block">
+                                    <div class="bg-gray-900 rounded-lg p-4 relative">
+                                        <pre class="text-blue-400 text-sm overflow-x-auto"><code># Check table sizes
+psql -c "SELECT schemaname, tablename, pg_size_pretty(pg_total_relation_size(schemaname||'.'||tablename)) AS size FROM pg_tables WHERE schemaname = 'public' ORDER BY pg_total_relation_size(schemaname||'.'||tablename) DESC;"</code></pre>
+                                        <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
+                                            Copy
+                                        </button>
                                     </div>
                                 </div>
-
-                                <div class="bg-blue-900/50 border border-blue-700 p-4 rounded-lg">
-                                    <h4 class="text-blue-300 font-semibold mb-2">Permission Denied</h4>
-                                    <p class="text-gray-300 mb-2">Fix script permissions:</p>
-                                    <div class="code-block">
-                                        <div class="bg-gray-900 rounded-lg p-4 relative">
-                                            <pre class="text-green-400 text-sm overflow-x-auto"><code># Make script executable
-chmod +x full-snailycad-recovery.sh
-
-# Check current permissions
-ls -la full-snailycad-recovery.sh</code></pre>
-                                            <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
-                                                Copy
-                                            </button>
-                                        </div>
+                            </div>
+                            
+                            <div>
+                                <h4 class="text-white font-semibold mb-3">Integrity Check</h4>
+                                <div class="code-block">
+                                    <div class="bg-gray-900 rounded-lg p-4 relative">
+                                        <pre class="text-blue-400 text-sm overflow-x-auto"><code># Basic integrity check
+psql -c "SELECT schemaname, tablename, attname, n_distinct, correlation FROM pg_stats WHERE schemaname = 'public' LIMIT 10;"</code></pre>
+                                        <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
+                                            Copy
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -528,72 +500,30 @@ ls -la full-snailycad-recovery.sh</code></pre>
                 </section>
             </div>
 
-            <!-- Batch Script Documentation -->
-            <div id="batch-content" class="max-w-7xl mx-auto" style="display: none;">
+            <!-- Windows Commands -->
+            <div id="windows-content" class="max-w-7xl mx-auto" style="display: none;">
                 <div class="mb-8">
-                    <h1 class="text-3xl font-bold text-white mb-4">SnailyCAD Recovery - Batch Script (.bat)</h1>
-                    <p class="text-gray-300 text-lg">Complete administration tool for Windows systems</p>
+                    <h1 class="text-3xl font-bold text-white mb-4">SnailyCAD Manual Recovery - Windows</h1>
+                    <p class="text-gray-300 text-lg">Step-by-step manual commands for Windows systems</p>
                 </div>
 
-                <!-- Overview -->
+                <!-- Database Setup -->
                 <section class="mb-12">
-                    <h2 class="text-2xl font-semibold text-white mb-4">Overview</h2>
-                    <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-                        <p class="text-gray-300 mb-4">
-                            The <code class="bg-gray-700 px-2 py-1 rounded text-blue-300">recover.bat</code> script is a Windows batch file that provides the same functionality as the shell script for Windows environments.
-                        </p>
-                        <div class="bg-blue-900/50 border border-blue-700 p-4 rounded-lg">
-                            <h4 class="text-blue-300 font-semibold mb-2">Key Features:</h4>
-                            <ul class="text-gray-300 space-y-1">
-                                <li>• Automatic PostgreSQL version detection</li>
-                                <li>• Windows-native command prompt interface</li>
-                                <li>• Same database management capabilities</li>
-                                <li>• Error handling and validation</li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Prerequisites -->
-                <section class="mb-12">
-                    <h2 class="text-2xl font-semibold text-white mb-4">Prerequisites</h2>
-                    <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <h4 class="text-white font-semibold mb-3">System Requirements</h4>
-                                <ul class="text-gray-300 space-y-2">
-                                    <li>• Windows 10/11 or Windows Server</li>
-                                    <li>• Command Prompt or PowerShell</li>
-                                    <li>• PostgreSQL installed locally</li>
-                                    <li>• Administrator privileges (recommended)</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h4 class="text-white font-semibold mb-3">PostgreSQL Installation</h4>
-                                <ul class="text-gray-300 space-y-2">
-                                    <li>• PostgreSQL 10+ installed</li>
-                                    <li>• psql.exe accessible</li>
-                                    <li>• Database credentials available</li>
-                                    <li>• Network connectivity to database</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Installation -->
-                <section class="mb-12">
-                    <h2 class="text-2xl font-semibold text-white mb-4">Installation & Usage</h2>
+                    <h2 class="text-2xl font-semibold text-white mb-4">Database Connection Setup</h2>
                     
                     <div class="space-y-6">
                         <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-                            <h3 class="text-xl font-semibold text-white mb-4">Step 1: Download the Script</h3>
+                            <h3 class="text-xl font-semibold text-white mb-4">Step 1: Find PostgreSQL Installation</h3>
                             <div class="code-block">
                                 <div class="bg-gray-900 rounded-lg p-4 relative">
-                                    <pre class="text-green-400 text-sm overflow-x-auto"><code>REM Download using PowerShell
-powershell -Command "Invoke-WebRequest -Uri 'https://github.com/EWANZO101/newdocs/raw/main/caddownloads/recover.bat' -OutFile 'recover.bat'"
+                                    <pre class="text-green-400 text-sm overflow-x-auto"><code>REM Check for PostgreSQL installations
+dir "C:\Program Files\PostgreSQL\" /AD
 
-REM Or download manually from the browser and save as recover.bat</code></pre>
+REM Find psql.exe in all versions
+dir "C:\Program Files\PostgreSQL\*\bin\psql.exe" /S
+
+REM Check if psql is in PATH
+where psql</code></pre>
                                     <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
                                         Copy
                                     </button>
@@ -602,15 +532,15 @@ REM Or download manually from the browser and save as recover.bat</code></pre>
                         </div>
 
                         <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-                            <h3 class="text-xl font-semibold text-white mb-4">Step 2: Run as Administrator</h3>
+                            <h3 class="text-xl font-semibold text-white mb-4">Step 2: Set Environment Variables</h3>
                             <div class="code-block">
                                 <div class="bg-gray-900 rounded-lg p-4 relative">
-                                    <pre class="text-green-400 text-sm overflow-x-auto"><code>REM Right-click on Command Prompt and select "Run as administrator"
-REM Navigate to the directory containing recover.bat
-cd C:\path\to\script
-
-REM Run the script
-recover.bat</code></pre>
+                                    <pre class="text-green-400 text-sm overflow-x-auto"><code>REM Set database connection details
+set PGHOST=localhost
+set PGPORT=5432
+set PGUSER=postgres
+set PGDATABASE=snaily-cad-v4
+set PGPASSWORD=your_password_here</code></pre>
                                     <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
                                         Copy
                                     </button>
@@ -619,17 +549,14 @@ recover.bat</code></pre>
                         </div>
 
                         <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-                            <h3 class="text-xl font-semibold text-white mb-4">Step 3: PostgreSQL Detection</h3>
-                            <p class="text-gray-300 mb-4">The script automatically checks for PostgreSQL installations in standard locations:</p>
+                            <h3 class="text-xl font-semibold text-white mb-4">Step 3: Test Database Connection</h3>
                             <div class="code-block">
                                 <div class="bg-gray-900 rounded-lg p-4 relative">
-                                    <pre class="text-blue-400 text-sm overflow-x-auto"><code>C:\Program Files\PostgreSQL\16\bin\psql.exe
-C:\Program Files\PostgreSQL\15\bin\psql.exe
-C:\Program Files\PostgreSQL\14\bin\psql.exe
-C:\Program Files\PostgreSQL\13\bin\psql.exe
-C:\Program Files\PostgreSQL\12\bin\psql.exe
-C:\Program Files\PostgreSQL\11\bin\psql.exe
-C:\Program Files\PostgreSQL\10\bin\psql.exe</code></pre>
+                                    <pre class="text-green-400 text-sm overflow-x-auto"><code>REM Test connection (replace version number as needed)
+"C:\Program Files\PostgreSQL\15\bin\psql.exe" -c "SELECT 1;"
+
+REM Alternative with full connection string
+"C:\Program Files\PostgreSQL\15\bin\psql.exe" -U postgres -d snaily-cad-v4 -h localhost -p 5432 -c "SELECT version();"</code></pre>
                                     <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
                                         Copy
                                     </button>
@@ -639,27 +566,23 @@ C:\Program Files\PostgreSQL\10\bin\psql.exe</code></pre>
                     </div>
                 </section>
 
-                <!-- Functions (Same as Shell but Windows-specific) -->
+                <!-- All Functions with Windows Commands -->
                 <section class="mb-12">
-                    <h2 class="text-2xl font-semibold text-white mb-4">Available Functions</h2>
+                    <h2 class="text-2xl font-semibold text-white mb-4">Database Operations</h2>
                     
                     <div class="bg-yellow-900/50 border border-yellow-700 p-4 rounded-lg mb-6">
-                        <h4 class="text-yellow-300 font-semibold mb-2">📝 Note:</h4>
-                        <p class="text-gray-300">The Windows batch script provides the same functionality as the shell script. All SQL commands and database operations are identical.</p>
+                        <h4 class="text-yellow-300 font-semibold mb-2">📝 Windows Note</h4>
+                        <p class="text-gray-300">All SQL commands are identical to Unix/Linux. Only the psql executable path differs. Replace <code class="bg-gray-700 px-1 rounded">psql</code> with the full path to your PostgreSQL installation.</p>
                     </div>
 
-                    <div class="grid grid-cols-1 gap-6">
-                        <!-- Windows-specific command examples -->
+                    <div class="space-y-6">
+                        <!-- Template for Windows commands -->
                         <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-                            <h3 class="text-lg font-semibold text-white mb-3">Manual PostgreSQL Connection (Windows)</h3>
+                            <h3 class="text-lg font-semibold text-white mb-3">Command Template</h3>
+                            <p class="text-gray-300 mb-4">Replace <code class="bg-gray-700 px-2 py-1 rounded text-blue-300">VERSION</code> with your PostgreSQL version (10-16):</p>
                             <div class="code-block">
                                 <div class="bg-gray-900 rounded-lg p-4 relative">
-                                    <pre class="text-green-400 text-sm overflow-x-auto"><code>REM Connect using full path
-"C:\Program Files\PostgreSQL\15\bin\psql.exe" -U postgres -d snaily-cad-v4 -h localhost -p 5432
-
-REM Set environment variable for password
-set PGPASSWORD=your_password
-"C:\Program Files\PostgreSQL\15\bin\psql.exe" -U postgres -d snaily-cad-v4 -h localhost -p 5432</code></pre>
+                                    <pre class="text-green-400 text-sm overflow-x-auto"><code>"C:\Program Files\PostgreSQL\VERSION\bin\psql.exe" -c "SQL_COMMAND_HERE"</code></pre>
                                     <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
                                         Copy
                                     </button>
@@ -667,135 +590,172 @@ set PGPASSWORD=your_password
                             </div>
                         </div>
 
+                        <!-- List Users -->
                         <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-                            <h3 class="text-lg font-semibold text-white mb-3">Check PostgreSQL Service (Windows)</h3>
+                            <h3 class="text-lg font-semibold text-white mb-3">1. List All Users</h3>
                             <div class="code-block">
                                 <div class="bg-gray-900 rounded-lg p-4 relative">
-                                    <pre class="text-green-400 text-sm overflow-x-auto"><code>REM Check if PostgreSQL service is running
+                                    <pre class="text-blue-400 text-sm overflow-x-auto"><code>"C:\Program Files\PostgreSQL\15\bin\psql.exe" -c "SELECT row_number() OVER () AS num, id, username, \"discordId\" FROM public.\"User\" ORDER BY username;"</code></pre>
+                                    <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
+                                        Copy
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Unlink Discord -->
+                        <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                            <h3 class="text-lg font-semibold text-white mb-3">2. Unlink Discord ID</h3>
+                            <div class="space-y-3">
+                                <div class="code-block">
+                                    <div class="bg-gray-900 rounded-lg p-4 relative">
+                                        <pre class="text-blue-400 text-sm overflow-x-auto"><code>REM Find user by Discord ID
+"C:\Program Files\PostgreSQL\15\bin\psql.exe" -c "SELECT id, username, \"discordId\" FROM public.\"User\" WHERE \"discordId\" = 'REPLACE_WITH_DISCORD_ID';"</code></pre>
+                                        <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
+                                            Copy
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="code-block">
+                                    <div class="bg-gray-900 rounded-lg p-4 relative">
+                                        <pre class="text-blue-400 text-sm overflow-x-auto"><code>REM Unlink Discord ID
+"C:\Program Files\PostgreSQL\15\bin\psql.exe" -c "UPDATE public.\"User\" SET \"discordId\" = NULL WHERE \"discordId\" = 'REPLACE_WITH_DISCORD_ID';"</code></pre>
+                                        <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
+                                            Copy
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Disable Whitelist -->
+                        <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                            <h3 class="text-lg font-semibold text-white mb-3">3. Disable CAD Whitelist</h3>
+                            <div class="code-block">
+                                <div class="bg-gray-900 rounded-lg p-4 relative">
+                                    <pre class="text-blue-400 text-sm overflow-x-auto"><code>"C:\Program Files\PostgreSQL\15\bin\psql.exe" -c "UPDATE public.\"cad\" SET whitelisted = false;"</code></pre>
+                                    <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
+                                        Copy
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Login Features -->
+                        <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                            <h3 class="text-lg font-semibold text-white mb-3">4. Enable Regular Login & Disable Discord Auth</h3>
+                            <div class="space-y-3">
+                                <div class="code-block">
+                                    <div class="bg-gray-900 rounded-lg p-4 relative">
+                                        <pre class="text-blue-400 text-sm overflow-x-auto"><code>REM Enable username/password login
+"C:\Program Files\PostgreSQL\15\bin\psql.exe" -c "UPDATE public.\"CadFeature\" SET \"isEnabled\" = true WHERE feature = 'ALLOW_REGULAR_LOGIN';"</code></pre>
+                                        <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
+                                            Copy
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="code-block">
+                                    <div class="bg-gray-900 rounded-lg p-4 relative">
+                                        <pre class="text-blue-400 text-sm overflow-x-auto"><code>REM Disable Discord authentication
+"C:\Program Files\PostgreSQL\15\bin\psql.exe" -c "UPDATE public.\"CadFeature\" SET \"isEnabled\" = false WHERE feature = 'DISCORD_AUTH';"</code></pre>
+                                        <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
+                                            Copy
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Reset Password -->
+                        <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                            <h3 class="text-lg font-semibold text-white mb-3">5. Reset User Password</h3>
+                            <div class="space-y-3">
+                                <div class="code-block">
+                                    <div class="bg-gray-900 rounded-lg p-4 relative">
+                                        <pre class="text-blue-400 text-sm overflow-x-auto"><code>REM Enable pgcrypto extension
+"C:\Program Files\PostgreSQL\15\bin\psql.exe" -c "CREATE EXTENSION IF NOT EXISTS pgcrypto;"</code></pre>
+                                        <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
+                                            Copy
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="code-block">
+                                    <div class="bg-gray-900 rounded-lg p-4 relative">
+                                        <pre class="text-blue-400 text-sm overflow-x-auto"><code>REM Reset password by username (replace USERNAME_HERE and NEW_PASSWORD_HERE)
+"C:\Program Files\PostgreSQL\15\bin\psql.exe" -c "UPDATE public.\"User\" SET password = crypt('NEW_PASSWORD_HERE', gen_salt('bf')) WHERE username = 'USERNAME_HERE';"</code></pre>
+                                        <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
+                                            Copy
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Maintenance -->
+                        <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                            <h3 class="text-lg font-semibold text-white mb-3">6. Database Maintenance</h3>
+                            <div class="space-y-3">
+                                <div class="code-block">
+                                    <div class="bg-gray-900 rounded-lg p-4 relative">
+                                        <pre class="text-blue-400 text-sm overflow-x-auto"><code>REM Vacuum and analyze database
+"C:\Program Files\PostgreSQL\15\bin\psql.exe" -c "VACUUM ANALYZE;"</code></pre>
+                                        <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
+                                            Copy
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="code-block">
+                                    <div class="bg-gray-900 rounded-lg p-4 relative">
+                                        <pre class="text-blue-400 text-sm overflow-x-auto"><code>REM Check database size
+"C:\Program Files\PostgreSQL\15\bin\psql.exe" -c "SELECT pg_size_pretty(pg_database_size(current_database()));"</code></pre>
+                                        <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
+                                            Copy
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Windows Service Management -->
+                <section class="mb-12">
+                    <h2 class="text-2xl font-semibold text-white mb-4">PostgreSQL Service Management</h2>
+                    <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="text-white font-semibold mb-3">Service Status</h4>
+                                <div class="code-block">
+                                    <div class="bg-gray-900 rounded-lg p-4 relative">
+                                        <pre class="text-green-400 text-sm overflow-x-auto"><code>REM Check PostgreSQL service status
 sc query postgresql-x64-15
 
-REM Start PostgreSQL service
+REM List all PostgreSQL services
+sc query | findstr postgresql</code></pre>
+                                        <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
+                                            Copy
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h4 class="text-white font-semibold mb-3">Service Control</h4>
+                                <div class="code-block">
+                                    <div class="bg-gray-900 rounded-lg p-4 relative">
+                                        <pre class="text-green-400 text-sm overflow-x-auto"><code>REM Start PostgreSQL service
 net start postgresql-x64-15
 
 REM Stop PostgreSQL service
 net stop postgresql-x64-15</code></pre>
-                                    <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
-                                        Copy
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-                            <h3 class="text-lg font-semibold text-white mb-3">Find PostgreSQL Installation</h3>
-                            <div class="code-block">
-                                <div class="bg-gray-900 rounded-lg p-4 relative">
-                                    <pre class="text-green-400 text-sm overflow-x-auto"><code>REM Find PostgreSQL installation directory
-dir "C:\Program Files\PostgreSQL\" /AD
-
-REM Check if psql exists
-dir "C:\Program Files\PostgreSQL\*\bin\psql.exe" /S
-
-REM Add PostgreSQL to PATH temporarily
-set PATH=%PATH%;C:\Program Files\PostgreSQL\15\bin</code></pre>
-                                    <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
-                                        Copy
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Windows-specific Troubleshooting -->
-                <section class="mb-12">
-                    <h2 class="text-2xl font-semibold text-white mb-4">Windows-Specific Troubleshooting</h2>
-                    
-                    <div class="space-y-6">
-                        <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-                            <h3 class="text-lg font-semibold text-white mb-3">Common Windows Issues</h3>
-                            
-                            <div class="space-y-4">
-                                <div class="bg-red-900/50 border border-red-700 p-4 rounded-lg">
-                                    <h4 class="text-red-300 font-semibold mb-2">Script Won't Run</h4>
-                                    <p class="text-gray-300 mb-2">If the batch file doesn't execute:</p>
-                                    <div class="code-block">
-                                        <div class="bg-gray-900 rounded-lg p-4 relative">
-                                            <pre class="text-green-400 text-sm overflow-x-auto"><code>REM Check execution policy (if using PowerShell)
-Get-ExecutionPolicy
-
-REM Run from Command Prompt instead
-cmd.exe
-recover.bat
-
-REM Check file association
-assoc .bat</code></pre>
-                                            <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
-                                                Copy
-                                            </button>
-                                        </div>
+                                        <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
+                                            Copy
+                                        </button>
                                     </div>
-                                </div>
-
-                                <div class="bg-yellow-900/50 border border-yellow-700 p-4 rounded-lg">
-                                    <h4 class="text-yellow-300 font-semibold mb-2">PostgreSQL Not Found</h4>
-                                    <p class="text-gray-300 mb-2">If PostgreSQL detection fails:</p>
-                                    <div class="code-block">
-                                        <div class="bg-gray-900 rounded-lg p-4 relative">
-                                            <pre class="text-green-400 text-sm overflow-x-auto"><code>REM Check installed programs
-wmic product where "name like '%PostgreSQL%'" get name,version
-
-REM Look for psql in different locations
-where psql
-where /R "C:\Program Files" psql.exe
-
-REM Manually specify version when prompted
-REM Enter version number (10-16) when asked</code></pre>
-                                            <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
-                                                Copy
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="bg-blue-900/50 border border-blue-700 p-4 rounded-lg">
-                                    <h4 class="text-blue-300 font-semibold mb-2">Permission Issues</h4>
-                                    <p class="text-gray-300 mb-2">For database permission errors:</p>
-                                    <div class="code-block">
-                                        <div class="bg-gray-900 rounded-lg p-4 relative">
-                                            <pre class="text-green-400 text-sm overflow-x-auto"><code>REM Run Command Prompt as Administrator
-REM Right-click Start Menu > Windows Terminal (Admin)
-
-REM Check current user permissions
-whoami /priv
-
-REM Check PostgreSQL service account
-sc qc postgresql-x64-15</code></pre>
-                                            <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
-                                                Copy
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
-                            <h3 class="text-lg font-semibold text-white mb-3">Windows Environment Setup</h3>
-                            <div class="code-block">
-                                <div class="bg-gray-900 rounded-lg p-4 relative">
-                                    <pre class="text-green-400 text-sm overflow-x-auto"><code>REM Set environment variables for PostgreSQL
-set PGUSER=postgres
-set PGPASSWORD=your_password
-set PGHOST=localhost
-set PGPORT=5432
-set PGDATABASE=snaily-cad-v4
-
-REM Verify connection
-psql -c "SELECT version();"</code></pre>
-                                    <button onclick="copyToClipboard(this.previousElementSibling.textContent)" class="copy-btn absolute top-2 right-2 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">
-                                        Copy
-                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -808,25 +768,25 @@ psql -c "SELECT version();"</code></pre>
     <script>
         // Tab switching functionality
         function showPage(page) {
-            const shellContent = document.getElementById('shell-content');
-            const batchContent = document.getElementById('batch-content');
-            const shellTab = document.getElementById('shell-tab');
-            const batchTab = document.getElementById('batch-tab');
+            const unixContent = document.getElementById('unix-content');
+            const windowsContent = document.getElementById('windows-content');
+            const unixTab = document.getElementById('unix-tab');
+            const windowsTab = document.getElementById('windows-tab');
             
-            if (page === 'shell') {
-                shellContent.style.display = 'block';
-                batchContent.style.display = 'none';
-                shellTab.classList.add('active', 'bg-blue-600', 'text-white');
-                shellTab.classList.remove('text-gray-300', 'hover:text-white', 'hover:bg-gray-700');
-                batchTab.classList.remove('active', 'bg-blue-600', 'text-white');
-                batchTab.classList.add('text-gray-300', 'hover:text-white', 'hover:bg-gray-700');
+            if (page === 'unix') {
+                unixContent.style.display = 'block';
+                windowsContent.style.display = 'none';
+                unixTab.classList.add('active', 'bg-blue-600', 'text-white');
+                unixTab.classList.remove('text-gray-300', 'hover:text-white', 'hover:bg-gray-700');
+                windowsTab.classList.remove('active', 'bg-blue-600', 'text-white');
+                windowsTab.classList.add('text-gray-300', 'hover:text-white', 'hover:bg-gray-700');
             } else {
-                shellContent.style.display = 'none';
-                batchContent.style.display = 'block';
-                batchTab.classList.add('active', 'bg-blue-600', 'text-white');
-                batchTab.classList.remove('text-gray-300', 'hover:text-white', 'hover:bg-gray-700');
-                shellTab.classList.remove('active', 'bg-blue-600', 'text-white');
-                shellTab.classList.add('text-gray-300', 'hover:text-white', 'hover:bg-gray-700');
+                unixContent.style.display = 'none';
+                windowsContent.style.display = 'block';
+                windowsTab.classList.add('active', 'bg-blue-600', 'text-white');
+                windowsTab.classList.remove('text-gray-300', 'hover:text-white', 'hover:bg-gray-700');
+                unixTab.classList.remove('active', 'bg-blue-600', 'text-white');
+                unixTab.classList.add('text-gray-300', 'hover:text-white', 'hover:bg-gray-700');
             }
         }
 
@@ -906,4 +866,3 @@ psql -c "SELECT version();"</code></pre>
     </script>
 </body>
 </html>
-
